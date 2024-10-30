@@ -1,0 +1,54 @@
+# .github/workflows/mlops.yml
+name: MLOps Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow when pushing to the main branch
+  pull_request:  # Optionally, trigger on pull requests to main
+    branches:
+      - main
+
+jobs:
+  build-and-train:
+    runs-on: ubuntu-latest  # Define the environment for the job
+
+    steps:
+      # Step 1: Checkout the Code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      # Step 3: Install Dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mlflow scikit-learn  # Install MLflow and model dependencies
+
+      # Step 4: Run the Model Training
+      - name: Run model training script
+        run: |
+          python src/train.py
+
+      # Step 5: Log Results
+      - name: Upload model artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: trained_model
+          path: models/  # Specify the directory where the trained model is saved
+
+  # Optional: Docker Build and Test
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Build
+        run: docker-compose -f docker-compose.yml up --build -d
