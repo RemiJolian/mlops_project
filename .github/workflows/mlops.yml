@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main  # Trigger the workflow when pushing to the main branch
-  pull_request:  # Optionally, trigger on pull requests to main
+  pull_request:  # Optionally trigger on pull requests to main
     branches:
       - main
 
