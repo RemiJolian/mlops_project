@@ -1,0 +1,24 @@
+name: MLOps Pipeline
+
+on: [push]
+
+jobs:
+  build-and-train:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install mlflow scikit-learn
+
+      - name: Run Training
+        run: |
+          python src/train.py
