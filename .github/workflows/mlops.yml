@@ -20,7 +20,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.12'
+          python-version: '3.8'
+
+      - name: Set MLflow Tracking URI
+        run: export MLFLOW_TRACKING_URI=file:///tmp/mlruns
 
       - name: Install Dependencies
         run: |
@@ -45,16 +48,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+           python-version: '3.8'
+
       - name: Install Docker Compose
         run: |
           sudo apt-get update
           sudo apt-get install -y docker-compose
 
+      - name: Set MLflow Tracking URI
+        run: export MLFLOW_TRACKING_URI=file:///tmp/mlruns
+
       - name: Build and Run Docker Containers
         run: |
           docker-compose -f docker-compose.yml up --build -d
 
-      # Step to display Docker logs if previous step fails
+      # Step to display Docker logs if the previous step fails
       - name: Display Docker Logs
         if: failure()
         run: |
