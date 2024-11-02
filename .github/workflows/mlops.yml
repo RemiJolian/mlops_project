@@ -16,7 +16,7 @@ jobs:
     steps:
       # Step 1: Checkout the Code
       - name: Checkout code
-        uses: actions/checkout@v3  # Update to v3
+        uses: actions/checkout@v3
 
       # Step 2: Set up Python
       - name: Set up Python
@@ -42,17 +42,13 @@ jobs:
           name: trained_model
           path: models/  # Specify the directory where the trained model is saved
 
+  # Optional: Docker Build and Test
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Update to v3
-
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install docker-compose -y
+        uses: actions/checkout@v3
 
       - name: Set up Docker Build
         run: docker-compose -f docker-compose.yml up --build -d
