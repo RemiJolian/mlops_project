@@ -57,4 +57,5 @@ jobs:
       # Step to display Docker logs if previous step fails
       - name: Display Docker Logs
         if: failure()
-        run: docker-compose -f docker-compose.yml logs
+        run: |
+          docker ps -a && docker-compose -f docker-compose.yml logs
