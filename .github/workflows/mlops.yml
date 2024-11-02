@@ -37,7 +37,7 @@ jobs:
 
       # Step 5: Log Results
       - name: Upload model artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Update to version v3
         with:
           name: trained_model
           path: models/  # Specify the directory where the trained model is saved
