@@ -8,9 +8,6 @@ from mlflow.models import infer_signature
 import os
 
 
-
-#mlflow.set_tracking_uri("My-Machine-Learning-Projects\MLFlow\mlruns")
-
 # Set MLflow tracking URI
 mlflow.set_tracking_uri("CI-CD-for-ML-Models\mlops_project\src\mlruns")
 
