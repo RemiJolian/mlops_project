@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-#  src/train.py
-=======
-# src/train.py
-# Iris Dataset- RandomForest model
->>>>>>> 51aa996905d2449c61f6f7dbdacd1d4bb8f55955
 import mlflow
 import mlflow.sklearn
 from sklearn.model_selection import train_test_split
