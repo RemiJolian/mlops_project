@@ -65,7 +65,7 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml up --build -d
 
-      # Step to display Docker logs if the previous step fails
+      # Step to display Docker logs if the previous step fails;
       - name: Display Docker Logs
         if: failure()
         run: |
