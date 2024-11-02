@@ -1,25 +1,37 @@
-# .github/workflows/mlops.yml
-name: MLOps Pipeline
+# # .github/workflows/mlops.yml
+# name: MLOps Pipeline
 
-on: [push]
+# on: [push]
 
-jobs:
-  build-and-train:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+# jobs:
+#   build-and-train:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.8'
+#       - name: Set up Python
+#         uses: actions/setup-python@v3
+#         with:
+#           python-version: '3.8'
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install mlflow scikit-learn
+#       - name: Install dependencies
+#         run: |
+#           pip install -r requirements.txt
+#           pip install mlflow scikit-learn
 
-      - name: Run Training
-        run: |
-          python src/train.py
+#       - name: Run Training
+#         run: |
+#           python src/train.py
+
+
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Ensure you have a Dockerfile in the specified location
+    ports:
+      - "5000:5000"  # Expose the port as needed by the application
+    environment:
+      - ENV_VARIABLE=value  # Example env variable, modify as needed
