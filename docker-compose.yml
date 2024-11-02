@@ -1,25 +1,12 @@
-# .github/workflows/mlops.yml
-name: MLOps Pipeline
+version: '3.8'  # Specify the version of Docker Compose
 
-on: [push]
-
-jobs:
-  build-and-train:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install mlflow scikit-learn
-
-      - name: Run Training
-        run: |
-          python src/train.py
+services:
+  mlops_service:  # Name of the service (you can change this to whatever name you prefer)
+    build:
+      context: .
+      dockerfile: Dockerfile  # Ensure this matches the Dockerfile in your project
+    environment:
+      - MLFLOW_TRACKING_URI=file:///mlops_project/mlruns
+    volumes:
+      - ./mlops_project/mlruns:/mlops_project/mlruns  # Mount the directory for MLflow tracking data
+    command: python src/main.py  # Ensure this matches the main script you want to run
