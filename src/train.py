@@ -32,11 +32,11 @@ with mlflow.start_run(run_name="Unique_Experiment_Run"):
     mlflow.log_param("max_depth", max_depth)
 
     # Train model
-    rf = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
-    rf.fit(X_train, y_train)
+    my-model= RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
+    my-model.fit(X_train, y_train)
 
     # Get model predictions
-    predictions = rf.predict(X_test)
+    predictions = my-model.predict(X_test)
     accuracy = accuracy_score(y_test, predictions)
 
     # Create model signature
@@ -44,7 +44,7 @@ with mlflow.start_run(run_name="Unique_Experiment_Run"):
 
     # Log model with signature and input example
     mlflow.sklearn.log_model(
-        rf, 
+        my-model, 
         "random_forest_model",
         signature=signature,
         input_example=X_train[:5]  # Using first 5 rows as example
