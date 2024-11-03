@@ -51,7 +51,7 @@ with mlflow.start_run(run_name="Unique_Experiment_Run"):
     )
 
     # Log accuracy metric
-    rf.log_metric("accuracy", accuracy)
+    mlflow.log_metric("accuracy", accuracy)
     print(f"Accuracy: {accuracy}")
 
     # Print run ID and experiment ID to confirm tracking
