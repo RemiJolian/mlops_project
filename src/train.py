@@ -32,11 +32,11 @@ with mlflow.start_run(run_name="Unique_Experiment_Run"):
     mlflow.log_param("max_depth", max_depth)
 
     # Train model
-    my-model= RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
-    my-model.fit(X_train, y_train)
+    rf= RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
+    rf.fit(X_train, y_train)
 
     # Get model predictions
-    predictions = my-model.predict(X_test)
+    predictions = rf.predict(X_test)
     accuracy = accuracy_score(y_test, predictions)
 
     # Create model signature
@@ -51,7 +51,7 @@ with mlflow.start_run(run_name="Unique_Experiment_Run"):
     )
 
     # Log accuracy metric
-    mlflow.log_metric("accuracy", accuracy)
+    rf.log_metric("accuracy", accuracy)
     print(f"Accuracy: {accuracy}")
 
     # Print run ID and experiment ID to confirm tracking
