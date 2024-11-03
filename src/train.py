@@ -44,7 +44,7 @@ with mlflow.start_run(run_name="Unique_Experiment_Run"):
 
     # Log model with signature and input example
     mlflow.sklearn.log_model(
-        my-model, 
+        rf, 
         "random_forest_model",
         signature=signature,
         input_example=X_train[:5]  # Using first 5 rows as example
